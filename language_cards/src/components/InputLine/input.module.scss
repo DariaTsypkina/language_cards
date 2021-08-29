@@ -1,0 +1,60 @@
+@import '../../assets/variables/Variables.module.scss';
+
+.line {
+    display: flex;
+    height: 50px;
+    box-sizing: border-box;
+
+    &>div {
+        width: 100%;
+        padding-top: 15px;
+        border: 1px solid black;
+        border-top: none;
+        border-right: none;
+        text-align: center;
+        max-height: fit-content;
+
+        &:first-child {
+            width: 20%;
+        }
+
+        &:last-child {
+            padding-top: 0px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            border-right: 1px solid black;
+        }
+    }
+}
+
+.input {
+    width: 80%;
+
+    &_number {
+        width: 20%;
+
+        &:hover {
+            background-color: $customYellow;
+            transition: all 0.5s;
+        }
+    }
+
+    border: 1px solid $customYellow;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+
+    &:hover {
+        background-color: $customYellow;
+        transition: all 0.5s;
+    }
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+// вынести в миксин

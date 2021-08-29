@@ -1,0 +1,60 @@
+@import '../../assets/variables/Variables.module.scss';
+
+.list {
+    width: 100%;
+    font-family: $fontFamily;
+}
+
+.table {
+    &__title {
+        text-align: center;
+        font-size: x-large;
+        font-weight: bolder;
+    }
+
+    &__line_header {
+        display: flex;
+        height: 30px;
+        line-height: 30px;
+        font-weight: bolder;
+        background-color: $customRed;
+        box-sizing: border-box;
+
+        &>th {
+            width: 100%;
+            border: 1px solid black;
+            border-right: none;
+            text-align: center;
+
+            &:first-child {
+                width: 20%;
+            }
+
+            &:last-child {
+                border-right: 1px solid black;
+            }
+        }
+    }
+
+    &__line {
+        display: flex;
+
+        &>div {
+            width: 100%;
+            border: 1px solid black;
+            border-top: none;
+            border-right: none;
+            text-align: center;
+
+            &:first-child {
+                width: 20%;
+            }
+
+            &:last-child {
+                border-right: 1px solid black;
+            }
+        }
+    }
+}
+
+// вынести в миксин

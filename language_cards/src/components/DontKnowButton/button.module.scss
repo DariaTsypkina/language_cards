@@ -1,0 +1,10 @@
+@import '../../assets/variables/Variables.module.scss';
+
+.button {
+    @include innerCardButtons;
+    background-color: $customRed;
+
+    &:hover {
+        background-color: $customRedDarker;
+    }
+}

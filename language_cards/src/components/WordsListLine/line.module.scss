@@ -1,0 +1,29 @@
+@import '../../assets/variables/Variables.module.scss';
+
+.line {
+    display: flex;
+    height: 50px;
+    box-sizing: border-box;
+
+    &>div {
+        width: 100%;
+        border: 1px solid black;
+        border-top: none;
+        border-right: none;
+        text-align: center;
+        max-height: fit-content;
+
+        &:first-child {
+            width: 20%;
+        }
+
+        &:last-child {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            border-right: 1px solid black;
+        }
+    }
+}
+
+// вынести в миксин

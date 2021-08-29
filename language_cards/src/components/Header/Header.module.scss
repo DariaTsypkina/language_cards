@@ -1,0 +1,21 @@
+@import '../../assets/variables/Variables.module.scss';
+
+.header {
+    width: 100vw;
+    min-height: 5vh;
+    max-height: max-content;
+    font-family: $fontFamily;
+}
+
+.title {
+    margin: 0px;
+    padding: 3% 0px;
+
+    &__container {
+        text-align: center;
+    }
+
+    &_red {
+        color: $customRed;
+    }
+}

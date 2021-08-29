@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+$fontFamily: 'Inter',
+sans-serif;
+
+$customRed: rgb(224, 64, 64);
+$customRedDarker: rgb(121, 47, 47);
+
+$customGreen: rgb(86, 216, 53);
+$customGreenDarker: rgb(57, 128, 42);
+
+$customYellow: rgb(233, 221, 52);
+
+@mixin cardView {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 300px;
+    min-height: 200px;
+    height: fit-content;
+    padding: 1% 3%;
+
+    border: 1px solid $customRed;
+    border-radius: 10px;
+    box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+    box-sizing: border-box;
+}
+
+@mixin innerCardButtons {
+    padding: 2% 3%;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: small;
+
+    &:hover {
+        cursor: pointer;
+        color: rgb(255, 255, 255);
+        transition: all 0.5s;
+    }
+}
+
+@mixin listButtons {}

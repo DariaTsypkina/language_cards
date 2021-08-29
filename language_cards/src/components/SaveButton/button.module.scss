@@ -1,0 +1,25 @@
+@import '../../assets/variables/Variables.module.scss';
+
+.button {
+    position: relative;
+    width: 60px;
+    height: 30px;
+    padding: 10px 10px 10px 15px;
+    background-color: $customGreen;
+    color: white;
+    font-size: small;
+    border: none;
+    border-radius: 5px;
+    box-sizing: border-box;
+
+    &:hover {
+        cursor: pointer;
+        font-weight: bolder;
+
+        &::before {
+            content: "\2714";
+            position: absolute;
+            left: 3px;
+        }
+    }
+}

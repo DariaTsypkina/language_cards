@@ -1,0 +1,21 @@
+@import '../../assets/variables/Variables.module.scss';
+
+.button {
+    width: 50px;
+    height: 30px;
+    padding: 8px;
+    text-align: center;
+    background-color: $customRedDarker;
+    color: white;
+    font-size: small;
+    border: none;
+    border-radius: 5px;
+    box-sizing: border-box;
+
+    &:hover {
+        cursor: pointer;
+        font-weight: bolder;
+        color: black;
+        transition: all 0.5s;
+    }
+}

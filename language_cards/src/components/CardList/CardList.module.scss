@@ -1,0 +1,7 @@
+@import '../../assets/variables/Variables.module.scss';
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5%;
+}

@@ -1,60 +1,86 @@
 @import '../../assets/variables/Variables.module.scss';
 
-.list {
+.container {
     width: 100%;
     font-family: $fontFamily;
 }
 
 .table {
-    &__title {
-        text-align: center;
-        font-size: x-large;
-        font-weight: bolder;
-    }
+    table-layout: fixed;
+    border-collapse: collapse;
+    border: 1px solid black;
 
-    &__line_header {
-        display: flex;
-        height: 30px;
-        line-height: 30px;
-        font-weight: bolder;
-        background-color: $customRed;
-        box-sizing: border-box;
+    &>thead>tr>th {
+        &:nth-child(1) {
+            width: 30%;
+        }
 
-        &>th {
-            width: 100%;
-            border: 1px solid black;
-            border-right: none;
-            text-align: center;
+        &:nth-child(2) {
+            width: 30%;
+        }
 
-            &:first-child {
-                width: 20%;
-            }
+        &:nth-child(3) {
+            width: 30%;
+        }
 
-            &:last-child {
-                border-right: 1px solid black;
-            }
+        &:nth-child(4) {
+            width: 10%;
         }
     }
 
-    &__line {
-        display: flex;
+    // width: 100%;
 
-        &>div {
-            width: 100%;
-            border: 1px solid black;
-            border-top: none;
-            border-right: none;
-            text-align: center;
+    // &__header {
+    //     height: 30px;
+    //     line-height: 30px;
+    //     font-weight: bolder;
+    //     background-color: $customRed;
+    //     box-sizing: border-box;
+    //     border: 1px solid black;
 
-            &:first-child {
-                width: 20%;
-            }
+    //     &>tr>th {
+    //         width: 100%;
+    //         border-right: 1px solid black;
+    //         text-align: center;
 
-            &:last-child {
-                border-right: 1px solid black;
-            }
-        }
-    }
+    //         &:first-child {
+    //             width: 20%;
+    //         }
+
+    //         &:last-child {
+    //             border-right: 1px solid black;
+    //         }
+    //     }
+    // }
+
+    // &__title {
+    //     margin-bottom: 0px;
+    //     text-align: center;
+    //     font-size: x-large;
+    //     font-weight: bolder;
+    // }
+
+
+
+    // &__line {
+    //     display: flex;
+
+    //     &>div {
+    //         width: 100%;
+    //         border: 1px solid black;
+    //         border-top: none;
+    //         border-right: none;
+    //         text-align: center;
+
+    //         &:first-child {
+    //             width: 20%;
+    //         }
+
+    //         &:last-child {
+    //             border-right: 1px solid black;
+    //         }
+    //     }
+    // }
 }
 
 // вынести в миксин

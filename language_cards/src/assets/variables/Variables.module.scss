@@ -13,8 +13,9 @@ $customYellow: rgb(233, 221, 52);
 
 @mixin cardView {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
     width: 300px;
     min-height: 200px;
     height: fit-content;
@@ -31,7 +32,7 @@ $customYellow: rgb(233, 221, 52);
     color: white;
     border: none;
     border-radius: 5px;
-    font-size: small;
+    font-size: medium;
 
     &:hover {
         cursor: pointer;

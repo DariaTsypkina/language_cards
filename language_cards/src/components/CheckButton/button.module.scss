@@ -8,3 +8,14 @@
         background-color: $customRedDarker;
     }
 }
+
+.translation {
+    font-weight: bolder;
+    font-size: x-large;
+
+    &:hover {
+        cursor: pointer;
+        color: $customGreenDarker;
+        transition: all 0.5s;
+    }
+}

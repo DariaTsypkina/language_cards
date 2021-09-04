@@ -5,26 +5,23 @@ import styles from './input.module.scss';
 export default class InputLine extends React.Component {
     render() {
         return (
-            <div className={styles.line}>
-                <div>
-                    <input className={styles.input_number} type="text" placeholder="№" />
-                </div>
-                <div>
+            <tr className={styles.line}>
+                <td>
                     <input className={styles.input} type="text" placeholder="Word" />
-                </div>
-                <div>
+                </td>
+                <td>
                     <input className={styles.input} type="text" placeholder="Translation" />
-                </div>
-                <div>
+                </td>
+                <td>
                     <input className={styles.input} type="text" placeholder="Transcription" />
-                </div>
-                <div>
+                </td>
+                <td>
                     <input className={styles.input} type="text" placeholder="Theme" />
-                </div>
-                <div className={styles.buttons}>
+                </td>
+                <td className={styles.buttons}>
                     <SaveButton />
-                </div>
-            </div>
+                </td>
+            </tr>
         );
     }
 }

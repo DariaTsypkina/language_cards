@@ -7,37 +7,34 @@ const words = [{ id: "4", english: "butterfly", transcription: "[ ˈbʌtəflaɪ 
 
 const mappedWords = words.map(word =>
     <WordsListLine
-        id={word.id}
+        key={word.id}
         english={word.english}
         translation={word.russian}
         transcription={word.transcription.replaceAll(' ', '')}
-        theme={word.tags} >
+    >
     </WordsListLine>);
 
 export default class WordsList extends React.Component {
     render() {
         return (
-            <div>
-                <h4 className={styles.table__title}>Words List</h4>
-                <table className={styles.list}>
-
-                    <tr className={styles.table__line_header}>
-                        <th>№</th>
-                        <th>Word</th>
-                        <th>Translation</th>
-                        <th>Transcription</th>
-                        <th>Theme</th>
-                        <th></th>
-                    </tr>
-                    <tbody>
-                        <tr>
-                            <InputLine />
-                            {
-                                words !== null
-                                    ? mappedWords
-                                    : <InputLine />
-                            }
+            <div className={styles.container}>
+                <table className={styles.table}>
+                    <caption className={styles.table__title}>Words List</caption>
+                    <thead className={styles.thead}>
+                        <tr className={styles.table__header}>
+                            <th>Word</th>
+                            <th>Translation</th>
+                            <th>Transcription</th>
+                            <th></th>
                         </tr>
+                    </thead>
+                    <tbody>
+                        <InputLine />
+                        {
+                            words !== null
+                                ? mappedWords
+                                : <InputLine />
+                        }
                     </tbody>
                 </table>
             </div>

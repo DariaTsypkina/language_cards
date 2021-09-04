@@ -8,17 +8,17 @@ export default class WordsListLine extends React.Component {
     render() {
         const { id, english, translation, transcription, theme } = this.props;
         return (
-            <div className={styles.line}>
-                <div>{id}</div>
-                <div>{english}</div>
-                <div>{translation}</div>
-                <div>{transcription}</div>
-                <div>{theme}</div>
-                <div>
+            <tr className={styles.line}>
+                <td>{id}</td>
+                <td>{english}</td>
+                <td>{translation}</td>
+                <td>{transcription}</td>
+                <td>{theme}</td>
+                <td>
                     <ChangeButton />
                     <DeleteButton />
-                </div>
-            </div>
+                </td>
+            </tr>
         );
     }
 }

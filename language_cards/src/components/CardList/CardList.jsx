@@ -9,6 +9,7 @@ export default function CardList() {
         {
             words.map(word =>
                 <Card
+                    key={word.id}
                     english={word.english}
                     translation={word.russian}
                     transcription={word.transcription.replaceAll(' ', '')}

@@ -24,7 +24,7 @@ export default class WordsList extends React.Component {
                         <tr className={styles.table__header}>
                             <th>Word</th>
                             <th>Translation</th>
-                            <th>Transcription</th>
+                            <th>Transcription1</th>
                             <th></th>
                         </tr>
                     </thead>

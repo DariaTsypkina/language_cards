@@ -1,24 +1,31 @@
-import React from 'react';
-import SaveButton from '../SaveButton/SaveButton';
-import DeleteButton from '../DeleteButton/DeleteButton';
+import React, { useState } from 'react';
+import InputLine from '../InputLine/InputLine';
 import ChangeButton from '../ChangeButton/ChangeButton';
 import styles from './line.module.scss';
 
-export default class WordsListLine extends React.Component {
-    render() {
-        const { id, english, translation, transcription, theme } = this.props;
-        return (
-            <tr className={styles.line}>
-                <td>{id}</td>
+export default function WordsListLine(props) {
+    const { english, translation, transcription } = props;
+    const [isSelected, toggleSelected] = useState(false);
+
+    const handleSelect = () => {
+        toggleSelected(!isSelected);
+    }
+
+    return (
+        !isSelected
+            ? <tr className={styles.line}>
                 <td>{english}</td>
                 <td>{translation}</td>
                 <td>{transcription}</td>
-                <td>{theme}</td>
                 <td>
-                    <ChangeButton />
-                    <DeleteButton />
+                    <ChangeButton change={handleSelect} />
                 </td>
             </tr>
-        );
-    }
+            : <InputLine
+                english={english}
+                translation={translation}
+                transcription={transcription}
+            />
+
+    );
 }

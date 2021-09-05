@@ -11,6 +11,8 @@ $customGreenDarker: rgb(57, 128, 42);
 
 $customYellow: rgb(233, 221, 52);
 
+$tableBorder: 1px solid black;
+
 @mixin cardView {
     display: flex;
     flex-direction: column;

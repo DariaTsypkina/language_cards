@@ -15,11 +15,15 @@
     &:hover {
         cursor: pointer;
         font-weight: bolder;
+        color: black;
+        transition: all 0.5s;
 
         &::before {
             content: "\2714";
             position: absolute;
             left: 3px;
+            color: black;
+            transition: all 0.5s;
         }
     }
 }

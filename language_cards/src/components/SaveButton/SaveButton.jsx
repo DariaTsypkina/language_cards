@@ -1,10 +1,9 @@
 import React from 'react';
 import styles from './button.module.scss';
 
-export default class KnowButton extends React.Component {
-    render() {
-        return (
-            <button className={styles.button}>Save</button>
-        )
-    }
+export default function SaveButton(props) {
+    const { save } = props;
+    return (
+        <button className={styles.button} onClick={save}>Save</button>
+    );
 }

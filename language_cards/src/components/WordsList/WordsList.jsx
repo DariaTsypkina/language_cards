@@ -22,14 +22,13 @@ export default class WordsList extends React.Component {
                     <caption className={styles.table__title}>Words List</caption>
                     <thead className={styles.thead}>
                         <tr className={styles.table__header}>
-                            <th>Word</th>
-                            <th>Translation</th>
-                            <th>Transcription1</th>
-                            <th></th>
+                            <th scope="col">Word</th>
+                            <th scope="col">Translation</th>
+                            <th scope="col">Transcription</th>
+                            <th scope="col"></th>
                         </tr>
                     </thead>
                     <tbody>
-                        <InputLine />
                         {
                             words !== null
                                 ? mappedWords

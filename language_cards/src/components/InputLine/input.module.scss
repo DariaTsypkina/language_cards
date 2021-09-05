@@ -1,45 +1,33 @@
 @import '../../assets/variables/Variables.module.scss';
 
 .line {
-    display: flex;
-    height: 50px;
-    box-sizing: border-box;
+    width: 100%;
 
-    &>div {
-        width: 100%;
-        padding-top: 15px;
-        border: 1px solid black;
-        border-top: none;
-        border-right: none;
+    &>td {
+        padding: 5px;
         text-align: center;
-        max-height: fit-content;
+        border: $tableBorder;
 
-        &:first-child {
+        &:nth-child(1) {
             width: 20%;
         }
 
-        &:last-child {
-            padding-top: 0px;
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            border-right: 1px solid black;
+        &:nth-child(2) {
+            width: 30%;
+        }
+
+        &:nth-child(3) {
+            width: 30%;
+        }
+
+        &:nth-child(4) {
+            width: 20%;
         }
     }
 }
 
 .input {
-    width: 80%;
-
-    &_number {
-        width: 20%;
-
-        &:hover {
-            background-color: $customYellow;
-            transition: all 0.5s;
-        }
-    }
-
+    width: 70%;
     border: 1px solid $customYellow;
     border-radius: 5px;
     cursor: pointer;
@@ -52,9 +40,5 @@
 }
 
 .buttons {
-    display: flex;
-    justify-content: center;
     align-items: center;
 }
-
-// вынести в миксин

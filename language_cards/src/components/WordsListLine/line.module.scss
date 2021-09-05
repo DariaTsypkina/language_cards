@@ -1,29 +1,27 @@
 @import '../../assets/variables/Variables.module.scss';
 
 .line {
-    display: flex;
-    height: 50px;
-    box-sizing: border-box;
+    width: 100%;
 
-    &>div {
-        width: 100%;
-        border: 1px solid black;
-        border-top: none;
-        border-right: none;
+    &>td {
+        padding: 5px;
         text-align: center;
-        max-height: fit-content;
+        border: $tableBorder;
 
-        &:first-child {
+        &:nth-child(1) {
             width: 20%;
         }
 
-        &:last-child {
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            border-right: 1px solid black;
+        &:nth-child(2) {
+            width: 30%;
+        }
+
+        &:nth-child(3) {
+            width: 30%;
+        }
+
+        &:nth-child(4) {
+            width: 20%;
         }
     }
 }
-
-// вынести в миксин

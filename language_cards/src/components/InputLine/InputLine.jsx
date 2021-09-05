@@ -22,27 +22,36 @@ export default function InputLine(props) {
         toggleCancel(!isCanceled);
     }
 
+    const inputLine =
+        <tr className={styles.line}>
+            <td>
+                <input className={styles.input} type="text" placeholder="Word" onChange={(val) => setEnglishValue(val.target.value)} value={engValue} />
+            </td>
+            <td>
+                <input className={styles.input} type="text" placeholder="Translation" onChange={(val) => setTranslation(val.target.value)} value={translValue} />
+            </td>
+            <td>
+                <input className={styles.input} type="text" placeholder="Transcription" onChange={(val) => setTranscription(val.target.value)} value={transcrValue} />
+            </td>
+            <td className={styles.buttons}>
+                <SaveButton save={handleSelect} />
+                <CancelChangeButton cancel={handleCancel} />
+            </td>
+        </tr>;
+
     return (
-        isSelected
+        isCanceled
             ? <WordsListLine
-                english={engValue}
-                translation={translValue}
-                transcription={transcrValue}
+                english={english}
+                translation={translation}
+                transcription={transcription}
             />
-            : <tr className={styles.line}>
-                <td>
-                    <input className={styles.input} type="text" placeholder="Word" onChange={(val) => setEnglishValue(val.target.value)} value={engValue} />
-                </td>
-                <td>
-                    <input className={styles.input} type="text" placeholder="Translation" onChange={(val) => setTranslation(val.target.value)} value={translValue} />
-                </td>
-                <td>
-                    <input className={styles.input} type="text" placeholder="Transcription" onChange={(val) => setTranscription(val.target.value)} value={transcrValue} />
-                </td>
-                <td className={styles.buttons}>
-                    <SaveButton save={handleSelect} />
-                    <CancelChangeButton cancel={handleCancel} />
-                </td>
-            </tr>
+            : isSelected
+                ? <WordsListLine
+                    english={engValue}
+                    translation={translValue}
+                    transcription={transcrValue}
+                />
+                : inputLine
     );
 }

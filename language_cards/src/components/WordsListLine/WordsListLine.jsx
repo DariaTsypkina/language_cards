@@ -26,6 +26,5 @@ export default function WordsListLine(props) {
                 translation={translation}
                 transcription={transcription}
             />
-
     );
 }

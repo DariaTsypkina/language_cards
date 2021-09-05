@@ -7,9 +7,11 @@ import styles from './input.module.scss';
 export default function InputLine(props) {
     const { english, translation, transcription } = props;
 
-    const [engValue, setEnglishValue] = useState(english);
-    const [translValue, setTranslation] = useState(translation);
-    const [transcrValue, setTranscription] = useState(transcription);
+    const [newWord, setNewWord] = useState({
+        english: english,
+        translation: translation,
+        transcription: transcription
+    });
 
     const [isSelected, toggleSelected] = useState(false);
     const [isCanceled, toggleCancel] = useState(false);
@@ -25,13 +27,25 @@ export default function InputLine(props) {
     const inputLine =
         <tr className={styles.line}>
             <td>
-                <input className={styles.input} type="text" placeholder="Word" onChange={(val) => setEnglishValue(val.target.value)} value={engValue} />
+                <input
+                    className={styles.input}
+                    type="text"
+                    onChange={val => setNewWord({...newWord, english: val.target.value})}
+                    value={newWord.english} />
             </td>
             <td>
-                <input className={styles.input} type="text" placeholder="Translation" onChange={(val) => setTranslation(val.target.value)} value={translValue} />
+                <input
+                    className={styles.input}
+                    type="text"
+                    onChange={val => setNewWord({...newWord, translation: val.target.value})}
+                    value={newWord.translation} />
             </td>
             <td>
-                <input className={styles.input} type="text" placeholder="Transcription" onChange={(val) => setTranscription(val.target.value)} value={transcrValue} />
+                <input
+                    className={styles.input}
+                    type="text"
+                    onChange={val => setNewWord({...newWord, transcription: val.target.value})}
+                    value={newWord.transcription} />
             </td>
             <td className={styles.buttons}>
                 <SaveButton save={handleSelect} />
@@ -48,9 +62,9 @@ export default function InputLine(props) {
             />
             : isSelected
                 ? <WordsListLine
-                    english={engValue}
-                    translation={translValue}
-                    transcription={transcrValue}
+                    english={newWord.english}
+                    translation={newWord.translation}
+                    transcription={newWord.transcription}
                 />
                 : inputLine
     );

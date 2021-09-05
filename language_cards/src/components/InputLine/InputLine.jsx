@@ -24,17 +24,11 @@ export default function InputLine(props) {
 
     return (
         isSelected
-            ? (
-                !isCanceled
-                    ? <WordsListLine
-                        english={engValue}
-                        translation={translValue}
-                        transcription={transcrValue}
-                    />
-                    : <WordsListLine
-
-                    />
-            )
+            ? <WordsListLine
+                english={engValue}
+                translation={translValue}
+                transcription={transcrValue}
+            />
             : <tr className={styles.line}>
                 <td>
                     <input className={styles.input} type="text" placeholder="Word" onChange={(val) => setEnglishValue(val.target.value)} value={engValue} />

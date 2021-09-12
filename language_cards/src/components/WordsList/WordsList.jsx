@@ -10,7 +10,7 @@ const mappedWords = words.map(word =>
         key={word.id}
         english={word.english}
         translation={word.russian}
-        transcription={word.transcription.replaceAll(' ', '')}
+        transcription={word.transcription}
     >
     </WordsListLine>);
 

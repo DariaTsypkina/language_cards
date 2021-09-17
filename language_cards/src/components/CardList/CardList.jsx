@@ -12,8 +12,7 @@ export default function CardList() {
                     key={word.id}
                     english={word.english}
                     translation={word.russian}
-                    transcription={word.transcription.replaceAll(' ', '')}
-                    theme={word.tags} >
+                    transcription={word.transcription} >
                 </Card>)
         }
     </section >

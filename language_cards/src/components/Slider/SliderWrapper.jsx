@@ -19,10 +19,7 @@ export default function SliderWrapper(props) {
             <div className={styles.button__container}>
                 <button className={styles.button} onClick={onShowNext}>&#8594;</button>
             </div>
-            {
-                number > dataLength - 1 ? ""
-                    : <div className={styles.count__container}>{number} / {dataLength - 1}</div>
-            }
+            <div className={styles.count__container}>{number + 1} / {dataLength}</div>
         </div>
     )
 }

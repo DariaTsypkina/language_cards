@@ -1,10 +1,13 @@
 @import '../../assets/variables/Variables.module.scss';
 
 .header {
+    box-sizing: border-box;
+    position: fixed;
     width: 100vw;
-    min-height: 5vh;
+    min-height: fit-content;
     max-height: max-content;
     font-family: $fontFamily;
+    background-color: rgba(255, 255, 255, 0.623);
 }
 
 .title {

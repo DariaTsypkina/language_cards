@@ -39,6 +39,24 @@
     font-size: large;
 }
 
-.card {
+.card,
+.error,
+.loading {
     @include cardView;
+}
+
+.info {
+    text-align: center;
+    font-weight: bolder;
+    font-size: larger;
+    font-family: $fontFamily;
+}
+
+.error {
+    color: $customRed;
+
+    &__details {
+        font-weight: normal;
+        font-size: medium;
+    }
 }

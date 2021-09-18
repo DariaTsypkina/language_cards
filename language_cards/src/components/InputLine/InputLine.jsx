@@ -30,21 +30,21 @@ export default function InputLine(props) {
                 <input
                     className={styles.input}
                     type="text"
-                    onChange={val => setNewWord({...newWord, english: val.target.value})}
+                    onChange={val => setNewWord({ ...newWord, english: val.target.value })}
                     value={newWord.english} />
             </td>
             <td>
                 <input
                     className={styles.input}
                     type="text"
-                    onChange={val => setNewWord({...newWord, translation: val.target.value})}
+                    onChange={val => setNewWord({ ...newWord, translation: val.target.value })}
                     value={newWord.translation} />
             </td>
             <td>
                 <input
                     className={styles.input}
                     type="text"
-                    onChange={val => setNewWord({...newWord, transcription: val.target.value})}
+                    onChange={val => setNewWord({ ...newWord, transcription: val.target.value })}
                     value={newWord.transcription} />
             </td>
             <td className={styles.buttons}>
@@ -53,19 +53,19 @@ export default function InputLine(props) {
             </td>
         </tr>;
 
-    return (
-        isCanceled
-            ? <WordsListLine
-                english={english}
-                translation={translation}
-                transcription={transcription}
-            />
-            : isSelected
-                ? <WordsListLine
-                    english={newWord.english}
-                    translation={newWord.translation}
-                    transcription={newWord.transcription}
-                />
-                : inputLine
-    );
+    if (isCanceled) {
+        return <WordsListLine
+            english={english}
+            translation={translation}
+            transcription={transcription}
+        />
+    } else if (isSelected) {
+        return <WordsListLine
+            english={newWord.english}
+            translation={newWord.translation}
+            transcription={newWord.transcription}
+        />
+    } else {
+        return inputLine;
+    }
 }

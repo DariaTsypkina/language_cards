@@ -1,11 +1,20 @@
 @import '../../assets/variables/Variables.module.scss';
 
+.title {
+    margin: 0px;
+    margin-bottom: 20px;
+    color: $customRed;
+    text-align: center;
+    text-shadow: 5px 3px 3px rgb(182, 182, 182);
+}
+
 .container {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
     max-width: 475px;
+    margin: 0 auto;
 }
 
 .button {

@@ -1,3 +1,10 @@
 .main {
+    width: 100vw;
+    min-height: 88vh;
     padding: 12vh 50px 0px 50px;
+    box-sizing: border-box;
+
+    @media screen and (max-width: 425px) {
+        padding: 12vh 10px 10px 10px;
+    }
 }

@@ -17,6 +17,9 @@ const Menu = () => {
                         </NavLink>
                     </li>
                     <li>
+                        <NavLink to="/">Main</NavLink>
+                    </li>
+                    <li>
                         <NavLink to="/game">Game</NavLink>
                     </li>
                     <li>

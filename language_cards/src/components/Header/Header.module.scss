@@ -24,12 +24,12 @@
 
     font-size: x-large;
 
-    @media screen and (max-width: 425px) {
+    @media screen and (max-width: 768px) {
         display: none;
     }
 }
 
-h1 {
+.h1 {
     margin: 0px;
     margin-left: 10px;
     font-size: xx-large;

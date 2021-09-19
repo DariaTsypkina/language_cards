@@ -25,7 +25,7 @@ export default class WordsList extends React.Component {
                             <th scope="col">Word</th>
                             <th scope="col">Translation</th>
                             <th scope="col">Transcription</th>
-                            <th scope="col"></th>
+                            <th scope="col">Let's correct</th>
                         </tr>
                     </thead>
                     <tbody>

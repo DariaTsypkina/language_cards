@@ -10,10 +10,10 @@ export default function Slider() {
 
     const getWords = () => {
         fetch('./words.json', {
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            }
+            // headers: {
+            //     'Content-Type': 'application/json',
+            //     'Accept': 'application/json'
+            // }
         })
             .then(res => res.json())
             .then(result => {
@@ -31,17 +31,17 @@ export default function Slider() {
     }, [])
 
     useEffect(() => {
-        if (pos > words?.length) {
+        if (pos > words.length) {
             setPos(0);
         }
     }, [pos, words]);
 
     const showPrevHandler = () => {
-        setPos(pos === 0 ? words?.length - 1 : pos - 1);
+        setPos(pos === 0 ? words.length - 1 : pos - 1);
     }
 
     const showNextHandler = () => {
-        setPos(pos === words?.length - 1 ? 0 : pos + 1);
+        setPos(pos === words.length - 1 ? 0 : pos + 1);
     }
 
     if (error) {

@@ -1,24 +1,38 @@
 @import '../../assets/variables/Variables.module.scss';
 
 .header {
-    box-sizing: border-box;
     position: fixed;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
     width: 100vw;
-    min-height: fit-content;
-    max-height: max-content;
+    min-height: 5vh;
+    max-height: fit-content;
+
     font-family: $fontFamily;
-    background-color: rgba(255, 255, 255, 0.623);
+
+    background-color: rgb(255, 255, 255);
+    box-sizing: border-box;
+    box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+    z-index: 1;
 }
 
-.title {
+.info {
+    display: flex;
+    align-items: center;
+
+    font-size: x-large;
+
+    @media screen and (max-width: 425px) {
+        display: none;
+    }
+}
+
+h1 {
     margin: 0px;
-    padding: 3% 0px;
-
-    &__container {
-        text-align: center;
-    }
-
-    &_red {
-        color: $customRed;
-    }
+    margin-left: 10px;
+    font-size: xx-large;
+    font-weight: bolder;
+    color: $customRed;
 }

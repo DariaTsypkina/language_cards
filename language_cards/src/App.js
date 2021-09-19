@@ -11,6 +11,7 @@ import Header from './components/Header/Header';
 import Slider from './components/Slider/Slider';
 import WordsList from './components/WordsList/WordsList';
 import CardList from './components/CardList/CardList';
+import Error404 from './components/Error_404/Error404';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route exact path="/game" component={Slider} />
           <Route exact path="/cards" component={CardList} />
           <Route exact path="/" component={WordsList} />
+          <Route component={Error404}/>
         </Switch>
 
       </main>

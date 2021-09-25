@@ -44,17 +44,17 @@ export default function Slider() {
         setPos(pos === words.length - 1 ? 0 : pos + 1);
     }
 
-    if (error) {
+    if (!isLoaded) {
+        return <div className={styles.container}>
+            <div className={styles.loading}>
+                <p className={styles.info}>Loading...</p>
+            </div>
+        </div>
+    } else if (error) {
         return <div className={styles.container}>
             <div className={styles.error}>
                 <p className={styles.info}>Something went wrong...<br />
                     <span className={styles.error__details}>{error.message}</span></p>
-            </div>
-        </div>
-    } else if (!isLoaded) {
-        return <div className={styles.container}>
-            <div className={styles.loading}>
-                <p className={styles.info}>Loading...</p>
             </div>
         </div>
     } else {

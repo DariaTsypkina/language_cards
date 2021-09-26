@@ -8,6 +8,13 @@
     text-shadow: 5px 3px 3px rgb(182, 182, 182);
 }
 
+.progress {
+    margin-bottom: 10px;
+    font-family: $fontFamily;
+    font-weight: bolder;
+    text-align: center;
+}
+
 .container {
     display: flex;
     align-items: center;

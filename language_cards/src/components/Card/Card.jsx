@@ -3,10 +3,6 @@ import styles from './Card.module.scss';
 import CheckButton from '../CheckButton/CheckButton';
 
 export default function Card(props) {
-    const handleChange = () => {
-        props.handleLearnt();
-    }
-
     return (
         <div className={styles.card}>
             <div className={styles.card__word}>{props.english}</div>
@@ -14,7 +10,7 @@ export default function Card(props) {
             <div className={styles.buttons}>
                 <CheckButton
                     translation={props.translation}
-                    handleChange={handleChange}
+                    handleProgress={props.handleProgress}
                 />
             </div>
         </div>

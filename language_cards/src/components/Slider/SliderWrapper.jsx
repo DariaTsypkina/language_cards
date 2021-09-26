@@ -4,16 +4,17 @@ import styles from './slider.module.scss';
 
 export default function SliderWrapper(props) {
     const { onShowPrev, onShowNext, data, number, dataLength } = props;
-    const [learnt, setLearnt] = useState(0);
+    const [progress, setProgress] = useState(0);
 
-    const handleLearnt = () => {
-        setLearnt(learnt + 1);
+    const handleProgress = () => {
+        setProgress(progress + 1);
     }
+    const yourProgress = progress === 0 || progress === 1 ? progress + ` word` : progress + ` words`;
 
     return (
         <div>
             <h1 className={styles.title}>1... 2... 3... Learn!</h1>
-            <div>Congrats! You've learnt {learnt} words</div>
+            <div className={styles.progress}>Congrats! You've learnt {yourProgress}</div>
             <div className={styles.container}>
                 <div className={styles.button__container}>
                     <button className={styles.button} onClick={onShowPrev}>&#8592;</button>
@@ -23,7 +24,8 @@ export default function SliderWrapper(props) {
                     english={data[number].english}
                     translation={data[number].russian}
                     transcription={data[number].transcription}
-                    handleLearnt={handleLearnt}
+                    progress={progress}
+                    handleProgress={handleProgress}
                 />
                 <div className={styles.button__container}>
                     <button className={styles.button} onClick={onShowNext}>&#8594;</button>

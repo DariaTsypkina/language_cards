@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import styles from './Card.module.scss';
 import CheckButton from '../CheckButton/CheckButton';
 
 export default function Card(props) {
+    const buttonRef = useRef(null);
+    useEffect(() => buttonRef.current && buttonRef.current.focus());
+
     return (
         <div className={styles.card}>
             <div className={styles.card__word}>{props.english}</div>
@@ -11,6 +14,7 @@ export default function Card(props) {
                 <CheckButton
                     translation={props.translation}
                     handleProgress={props.handleProgress}
+                    ref={buttonRef}
                 />
             </div>
         </div>

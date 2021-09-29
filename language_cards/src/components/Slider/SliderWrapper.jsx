@@ -12,7 +12,7 @@ export default function SliderWrapper(props) {
     const handleProgress = () => {
         setProgress(progress + 1);
     }
-    const yourProgress = progress === 0 || progress === 1 ? progress + ` word` : progress + ` words`;
+    const yourProgress = progress <= 1 ? progress + ` word` : progress + ` words`;
 
     return (
         <div>

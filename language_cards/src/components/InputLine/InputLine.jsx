@@ -20,6 +20,15 @@ export default function InputLine(props) {
         toggleSelected(!isSelected);
     }
 
+    const handleChange = (e) => {
+        const target = e.target;
+        target.className = target.value === '' ? styles.red : styles.input;
+        setNewWord({
+            ...newWord,
+            [target.name]: target.value
+        });
+    }
+
     const handleCancel = () => {
         toggleCancel(!isCanceled);
     }
@@ -30,25 +39,29 @@ export default function InputLine(props) {
                 <input
                     className={styles.input}
                     type="text"
-                    onChange={val => setNewWord({ ...newWord, english: val.target.value })}
-                    value={newWord.english} />
+                    onChange={handleChange}
+                    value={newWord.english}
+                    name="english" />
             </td>
             <td>
                 <input
                     className={styles.input}
                     type="text"
-                    onChange={val => setNewWord({ ...newWord, translation: val.target.value })}
-                    value={newWord.translation} />
+                    onChange={handleChange}
+                    value={newWord.translation}
+                    name="translation" />
             </td>
             <td>
                 <input
                     className={styles.input}
                     type="text"
-                    onChange={val => setNewWord({ ...newWord, transcription: val.target.value })}
-                    value={newWord.transcription} />
+                    onChange={handleChange}
+                    value={newWord.transcription}
+                    name="transcription" />
             </td>
             <td className={styles.buttons}>
-                <SaveButton save={handleSelect} />
+                <SaveButton save={handleSelect}
+                    words={newWord} />
                 <CancelChangeButton cancel={handleCancel} />
             </td>
         </tr>;

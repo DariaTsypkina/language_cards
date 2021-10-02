@@ -39,6 +39,15 @@
     }
 }
 
+.red {
+    width: 70%;
+    border: 1px solid $customRed;
+    border-radius: 5px;
+    background-color: $customRed;
+    cursor: pointer;
+    text-align: center;
+}
+
 .buttons {
     align-items: center;
 }

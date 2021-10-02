@@ -2,8 +2,13 @@ import React from 'react';
 import styles from './button.module.scss';
 
 export default function SaveButton(props) {
-    const { save } = props;
+    const { save, words } = props;
+
+    const inputValues = Object.values(words);
+
+    const isDisabled = inputValues.includes(''); // return true or false
+
     return (
-        <button className={styles.button} onClick={save}>Save</button>
-    );
+        <button className={styles.button} onClick={save} disabled={isDisabled}> Save</button >
+    )
 }

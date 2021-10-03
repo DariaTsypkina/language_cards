@@ -18,7 +18,7 @@ export default function InputLine(props) {
 
     const handleSelect = () => {
         toggleSelected(!isSelected);
-        console.log(newWord);
+        console.log('word', newWord);
     }
 
     const handleChange = (e) => {

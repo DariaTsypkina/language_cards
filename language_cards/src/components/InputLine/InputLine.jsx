@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import SaveButton from '../SaveButton/SaveButton';
 import CancelChangeButton from '../CancelChangeButton/CancelChangeButton';
 import WordsListLine from '../WordsListLine/WordsListLine';
@@ -15,24 +15,42 @@ export default function InputLine(props) {
 
     const [isSelected, toggleSelected] = useState(false);
     const [isCanceled, toggleCancel] = useState(false);
+    const [isDisabled, setIsDisabled] = useState(false);
 
-    const handleSelect = () => {
+    useEffect(() => {
+        Object.values(newWord).some((word) => word.trim().length < 1)
+            ? setIsDisabled(true) : setIsDisabled(false);
+    }, [newWord]);
+
+    const handleSave = () => {
         toggleSelected(!isSelected);
-        console.log('word', newWord);
+        validateInput(newWord) ? console.log('new word', newWord) : console.log('Please check typed values!');
     }
 
     const handleChange = (e) => {
         const target = e.target;
-        const trimmedValue = target.value.trim();
+        const length = target.value.trim().length;
 
-        target.className = trimmedValue.length < 1 ? styles.red : styles.input;
+        target.className = length < 1 ? styles.red : styles.input;
 
-        target.placeholder = trimmedValue.length < 1 ? `Please type ${target.name === 'english' ? 'word' : target.name}` : '';
+        target.placeholder = length < 1 ? `Please type ${target.name === 'english' ? 'word' : target.name}` : '';
 
         setNewWord({
             ...newWord,
             [target.name]: target.value
         });
+    }
+
+    const validateInput = (word) => {
+        if (!word.english.match(/^[A-Za-z0-9]*$/)) {
+            alert('Word should be typed in English');
+            return false;
+        }
+        if (!word.translation.match(/^[а-яё0-9]+$/i)) {
+            alert('Translation should be typed in Russian');
+            return false;
+        }
+        return true;
     }
 
     const handleCancel = () => {
@@ -54,8 +72,8 @@ export default function InputLine(props) {
                 })
             }
             <td className={styles.buttons}>
-                <SaveButton save={handleSelect}
-                    words={newWord} />
+                <SaveButton save={handleSave}
+                    isDisabled={isDisabled} />
                 <CancelChangeButton cancel={handleCancel} />
             </td>
         </tr>;

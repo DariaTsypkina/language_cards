@@ -18,11 +18,17 @@ export default function InputLine(props) {
 
     const handleSelect = () => {
         toggleSelected(!isSelected);
+        console.log(newWord);
     }
 
     const handleChange = (e) => {
         const target = e.target;
-        target.className = target.value === '' ? styles.red : styles.input;
+        const trimmedValue = target.value.trim();
+
+        target.className = trimmedValue.length < 1 ? styles.red : styles.input;
+
+        target.placeholder = trimmedValue.length < 1 ? `Please type ${target.name === 'english' ? 'word' : target.name}` : '';
+
         setNewWord({
             ...newWord,
             [target.name]: target.value
@@ -35,30 +41,18 @@ export default function InputLine(props) {
 
     const inputLine =
         <tr className={styles.line}>
-            <td>
-                <input
-                    className={styles.input}
-                    type="text"
-                    onChange={handleChange}
-                    value={newWord.english}
-                    name="english" />
-            </td>
-            <td>
-                <input
-                    className={styles.input}
-                    type="text"
-                    onChange={handleChange}
-                    value={newWord.translation}
-                    name="translation" />
-            </td>
-            <td>
-                <input
-                    className={styles.input}
-                    type="text"
-                    onChange={handleChange}
-                    value={newWord.transcription}
-                    name="transcription" />
-            </td>
+            {
+                Object.keys(newWord).map((word, index) => {
+                    return <td key={index}>
+                        <input
+                            className={styles.input}
+                            type="text"
+                            onChange={handleChange}
+                            value={newWord[word]}
+                            name={word} />
+                    </td>
+                })
+            }
             <td className={styles.buttons}>
                 <SaveButton save={handleSelect}
                     words={newWord} />

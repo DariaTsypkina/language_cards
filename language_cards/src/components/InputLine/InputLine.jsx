@@ -13,6 +13,12 @@ export default function InputLine(props) {
         transcription: transcription
     });
 
+    const [errors, setErrors] = useState({
+        english: false,
+        translation: false,
+        transcription: false
+    });
+
     const [isSelected, toggleSelected] = useState(false);
     const [isCanceled, toggleCancel] = useState(false);
     const [isDisabled, setIsDisabled] = useState(false);
@@ -23,34 +29,40 @@ export default function InputLine(props) {
     }, [newWord]);
 
     const handleSave = () => {
-        toggleSelected(!isSelected);
-        validateInput(newWord) ? console.log('new word', newWord) : console.log('Please check typed values!');
+        validateInput(newWord);
+        // console.log(errors);
+        // toggleSelected(!isSelected);
+        // validateInput(newWord) ? console.log('new word', newWord) : console.log('Please check typed values!');
     }
 
     const handleChange = (e) => {
         const target = e.target;
         const length = target.value.trim().length;
 
-        target.className = length < 1 ? styles.red : styles.input;
-
-        target.placeholder = length < 1 ? `Please type ${target.name === 'english' ? 'word' : target.name}` : '';
-
         setNewWord({
             ...newWord,
             [target.name]: target.value
+        });
+
+        setErrors({
+            ...errors,
+            [target.name]: length < 1
         });
     }
 
     const validateInput = (word) => {
         if (!word.english.match(/^[A-Za-z0-9]*$/)) {
-            alert('Word should be typed in English');
-            return false;
+            setErrors({
+                ...errors,
+                english: 'Only latin'
+            });
         }
         if (!word.translation.match(/^[а-яё0-9]+$/i)) {
-            alert('Translation should be typed in Russian');
-            return false;
+            setErrors({
+                ...errors,
+                translation: 'Only russian'
+            });
         }
-        return true;
     }
 
     const handleCancel = () => {
@@ -63,11 +75,13 @@ export default function InputLine(props) {
                 Object.keys(newWord).map((word, index) => {
                     return <td key={index}>
                         <input
-                            className={styles.input}
+                            className={errors[word] ? styles.red : styles.input}
                             type="text"
                             onChange={handleChange}
                             value={newWord[word]}
-                            name={word} />
+                            name={word}
+                            placeholder={errors[word] ? `Please type ${word === 'english' ? 'word' : word}` : ''} />
+                        <p>{errors[word]}</p>
                     </td>
                 })
             }

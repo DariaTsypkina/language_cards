@@ -5,7 +5,7 @@ import WordsListLine from '../WordsListLine/WordsListLine';
 import styles from './input.module.scss';
 
 export default function InputLine(props) {
-    const { english, translation, transcription } = props;
+    const { english, translation, transcription, id, handleEdit } = props;
 
     const [newWord, setNewWord] = useState({
         english: english,
@@ -29,10 +29,7 @@ export default function InputLine(props) {
     }, [newWord]);
 
     const handleSave = () => {
-        validateInput(newWord);
-        // console.log(errors);
-        // toggleSelected(!isSelected);
-        // validateInput(newWord) ? console.log('new word', newWord) : console.log('Please check typed values!');
+        validateInput();
     }
 
     const handleChange = (e) => {
@@ -50,24 +47,23 @@ export default function InputLine(props) {
         });
     }
 
-    const validateInput = (word) => {
-        if (!word.english.match(/^[A-Za-z0-9]*$/)) {
-            setErrors({
-                ...errors,
-                english: 'Only latin'
-            });
-        }
-        if (!word.translation.match(/^[а-яё0-9]+$/i)) {
-            setErrors({
-                ...errors,
-                translation: 'Only russian'
-            });
+    const validateInput = () => {
+        if (!newWord.english.match(/^[A-Za-z0-9]*$/)) {
+            setErrors({ ...errors, english: 'Latin only' });
+        } else if (!newWord.translation.match(/^[а-яё0-9]+$/i)) {
+            setErrors({ ...errors, translation: 'Cyrillic only' });
+        } else {
+            console.log('new word', newWord);
+            handleEdit(newWord, id);
+            toggleSelected(!isSelected);
         }
     }
 
     const handleCancel = () => {
         toggleCancel(!isCanceled);
     }
+
+    const handleEditClick = () => toggleSelected(!isSelected);
 
     const inputLine =
         <tr className={styles.line}>
@@ -81,7 +77,7 @@ export default function InputLine(props) {
                             value={newWord[word]}
                             name={word}
                             placeholder={errors[word] ? `Please type ${word === 'english' ? 'word' : word}` : ''} />
-                        <p>{errors[word]}</p>
+                        <span>{errors[word]}</span>
                     </td>
                 })
             }
@@ -100,9 +96,9 @@ export default function InputLine(props) {
         />
     } else if (isSelected) {
         return <WordsListLine
-            english={newWord.english}
-            translation={newWord.translation}
-            transcription={newWord.transcription}
+            english={english}
+            translation={translation}
+            transcription={transcription}
         />
     } else {
         return inputLine;

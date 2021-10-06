@@ -25,3 +25,29 @@
         }
     }
 }
+
+.input {
+    width: 70%;
+    border: 1px solid $customYellow;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+
+    &:hover {
+        background-color: $customYellow;
+        transition: all 0.5s;
+    }
+}
+
+.red {
+    width: 70%;
+    border: 1px solid $customRed;
+    border-radius: 5px;
+    background-color: $customRed;
+    cursor: pointer;
+    text-align: center;
+}
+
+.buttons {
+    align-items: center;
+}

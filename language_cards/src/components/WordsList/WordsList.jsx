@@ -19,6 +19,7 @@ export default class WordsList extends React.Component {
         this.setState({
             words: newState
         })
+        console.log(this.state.words)
     }
 
     render() {
@@ -39,7 +40,7 @@ export default class WordsList extends React.Component {
                         {
                             words?.map(word =>
                                 <WordsListLine
-
+                                    key={word.id}
                                     id={word.id}
                                     english={word.english}
                                     translation={word.translation}

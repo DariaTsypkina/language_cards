@@ -8,6 +8,7 @@ export default function WordsListLine(props) {
     const { english, translation, transcription, id, handleEdit } = props;
 
     const [newWord, setNewWord] = useState({
+        id: id,
         english: english,
         translation: translation,
         transcription: transcription
@@ -21,10 +22,18 @@ export default function WordsListLine(props) {
 
     const [isSelected, toggleSelected] = useState(false);
 
-    const isDisabled = Object.values(newWord).some((word) => word.trim().length < 1);
+    const isDisabled = Object.values(newWord).some((word) => !word);
 
     const handleSave = () => {
-        validateInput();
+        if (!newWord.english.match(/^[A-Za-z 0-9]*$/)) {
+            setErrors({ ...errors, english: 'Latin only' });
+        } else if (!newWord.translation.match(/^[а-яё 0-9]+$/i)) {
+            setErrors({ ...errors, translation: 'Cyrillic only' });
+        } else {
+            handleEdit(newWord, id);
+            console.log('new word', newWord);
+            toggleSelected(!isSelected);
+        }
     }
 
     const handleChange = (e) => {
@@ -42,19 +51,13 @@ export default function WordsListLine(props) {
         });
     }
 
-    const validateInput = () => {
-        if (!newWord.english.match(/^[A-Za-z 0-9]*$/)) {
-            setErrors({ ...errors, english: 'Latin only' });
-        } else if (!newWord.translation.match(/^[а-яё 0-9]+$/i)) {
-            setErrors({ ...errors, translation: 'Cyrillic only' });
-        } else {
-            handleEdit(newWord, id);
-            console.log('new word', newWord);
-            toggleSelected(!isSelected);
-        }
-    }
-
     const handleCancel = () => {
+        setNewWord({
+            id: id,
+            english: english,
+            translation: translation,
+            transcription: transcription
+        });
         toggleSelected(!isSelected);
     }
 
@@ -64,20 +67,36 @@ export default function WordsListLine(props) {
 
     const inputLine =
         <tr className={styles.line}>
-            {
-                Object.keys(newWord).map((word, index) => {
-                    return <td key={index}>
-                        <input
-                            className={errors[word] ? styles.red : styles.input}
-                            type="text"
-                            onChange={handleChange}
-                            value={newWord[word]}
-                            name={word}
-                            placeholder={errors[word] ? `Please type ${word === 'english' ? 'word' : word}` : ''} />
-                        <span>{errors[word]}</span>
-                    </td>
-                })
-            }
+            <td>
+                <input
+                    className={errors.english ? styles.red : styles.input}
+                    type="text"
+                    onChange={handleChange}
+                    value={newWord.english}
+                    name={'english'}
+                    placeholder={errors.english && "Please type english word"} />
+                <span>{errors.english}</span>
+            </td>
+            <td>
+                <input
+                    className={errors.translation ? styles.red : styles.input}
+                    type="text"
+                    onChange={handleChange}
+                    value={newWord.translation}
+                    name={'translation'}
+                    placeholder={errors.translation && "Please type english word"} />
+                <span>{errors.translation}</span>
+            </td>
+            <td>
+                <input
+                    className={errors.transcription ? styles.red : styles.input}
+                    type="text"
+                    onChange={handleChange}
+                    value={newWord.transcription}
+                    name={'transcription'}
+                    placeholder={errors.transcription && "Please type english word"} />
+                <span>{errors.transcription}</span>
+            </td>
             <td className={styles.buttons}>
                 <SaveButton save={handleSave}
                     isDisabled={isDisabled} />

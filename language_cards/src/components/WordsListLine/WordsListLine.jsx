@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import CancelChangeButton from '../CancelChangeButton/CancelChangeButton';
 import SaveButton from '../SaveButton/SaveButton';
 import ChangeButton from '../ChangeButton/ChangeButton';
@@ -20,13 +20,8 @@ export default function WordsListLine(props) {
     });
 
     const [isSelected, toggleSelected] = useState(false);
-    const [isCanceled, toggleCancel] = useState(false);
-    const [isDisabled, setIsDisabled] = useState(false);
 
-    useEffect(() => {
-        Object.values(newWord).some((word) => word.trim().length < 1)
-            ? setIsDisabled(true) : setIsDisabled(false);
-    }, [newWord]);
+    const isDisabled = Object.values(newWord).some((word) => word.trim().length < 1);
 
     const handleSave = () => {
         validateInput();
@@ -48,22 +43,24 @@ export default function WordsListLine(props) {
     }
 
     const validateInput = () => {
-        if (!newWord.english.match(/^[A-Za-z0-9]*$/)) {
+        if (!newWord.english.match(/^[A-Za-z 0-9]*$/)) {
             setErrors({ ...errors, english: 'Latin only' });
-        } else if (!newWord.translation.match(/^[а-яё0-9]+$/i)) {
+        } else if (!newWord.translation.match(/^[а-яё 0-9]+$/i)) {
             setErrors({ ...errors, translation: 'Cyrillic only' });
         } else {
-            console.log('new word', newWord);
             handleEdit(newWord, id);
+            console.log('new word', newWord);
             toggleSelected(!isSelected);
         }
     }
 
     const handleCancel = () => {
-        toggleCancel(!isCanceled);
+        toggleSelected(!isSelected);
     }
 
-    const handleEditClick = () => toggleSelected(!isSelected);
+    const handleEditClick = () => {
+        toggleSelected(!isSelected);
+    }
 
     const inputLine =
         <tr className={styles.line}>
@@ -88,27 +85,16 @@ export default function WordsListLine(props) {
             </td>
         </tr>;
 
-    if (!isSelected || isCanceled) {
-        return <tr className={styles.line}>
-            <td>{english}</td>
-            <td>{translation}</td>
-            <td>{transcription}</td>
-            <td>
-                <ChangeButton change={handleEditClick} />
-            </td>
-        </tr>
-    }
-    // else if (isCanceled) {
-    //     return <tr className={styles.line}>
-    //         <td>{english}</td>
-    //         <td>{translation}</td>
-    //         <td>{transcription}</td>
-    //         <td>
-    //             <ChangeButton change={handleEditClick} />
-    //         </td>
-    //     </tr>
-    // }
-    else {
-        return inputLine;
-    }
+    return (
+        isSelected
+            ? inputLine
+            : (<tr className={styles.line}>
+                <td>{english}</td>
+                <td>{translation}</td>
+                <td>{transcription}</td>
+                <td>
+                    <ChangeButton change={handleEditClick} />
+                </td>
+            </tr>)
+    )
 }

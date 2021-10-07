@@ -39,10 +39,10 @@ export default class WordsList extends React.Component {
                         {
                             words?.map(word =>
                                 <WordsListLine
-                                    key={word.id}
+
                                     id={word.id}
                                     english={word.english}
-                                    translation={word.russian}
+                                    translation={word.translation}
                                     transcription={word.transcription}
                                     handleEdit={this.handleEdit}
                                 />)

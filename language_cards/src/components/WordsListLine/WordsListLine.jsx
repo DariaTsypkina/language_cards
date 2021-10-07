@@ -58,6 +58,11 @@ export default function WordsListLine(props) {
             translation: translation,
             transcription: transcription
         });
+        setErrors({
+            english: false,
+            translation: false,
+            transcription: false
+        });
         toggleSelected(!isSelected);
     }
 
@@ -67,7 +72,7 @@ export default function WordsListLine(props) {
 
     const inputLine =
         <tr className={styles.line}>
-            <td>
+            <td className={styles.cell}>
                 <input
                     className={errors.english ? styles.red : styles.input}
                     type="text"
@@ -75,27 +80,30 @@ export default function WordsListLine(props) {
                     value={newWord.english}
                     name={'english'}
                     placeholder={errors.english && "Please type english word"} />
-                <span>{errors.english}</span>
+                <br />
+                <span className={errors.english && styles.error}>{errors.english}</span>
             </td>
-            <td>
+            <td className={styles.cell}>
                 <input
                     className={errors.translation ? styles.red : styles.input}
                     type="text"
                     onChange={handleChange}
                     value={newWord.translation}
                     name={'translation'}
-                    placeholder={errors.translation && "Please type english word"} />
-                <span>{errors.translation}</span>
+                    placeholder={errors.translation && "Please type translation"} />
+                <br />
+                <span className={errors.translation && styles.error}>{errors.translation}</span>
             </td>
-            <td>
+            <td className={styles.cell}>
                 <input
                     className={errors.transcription ? styles.red : styles.input}
                     type="text"
                     onChange={handleChange}
                     value={newWord.transcription}
                     name={'transcription'}
-                    placeholder={errors.transcription && "Please type english word"} />
-                <span>{errors.transcription}</span>
+                    placeholder={errors.transcription && "Please type transcription"} />
+                <br />
+                <span className={errors.transcription && styles.error}>{errors.transcription}</span>
             </td>
             <td className={styles.buttons}>
                 <SaveButton save={handleSave}

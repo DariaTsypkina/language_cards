@@ -18,8 +18,7 @@ export default class WordsList extends React.Component {
         });
         this.setState({
             words: newState
-        })
-        console.log(this.state.words)
+        });
     }
 
     render() {

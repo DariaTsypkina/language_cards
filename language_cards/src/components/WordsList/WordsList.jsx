@@ -34,15 +34,6 @@ export default class WordsList extends React.Component {
             .catch(error => this.setState({ error, isLoading: false }));
     }
 
-    handleEdit = (value, id) => {
-        const newState = this.state.words.map(el => {
-            return el.id === id ? value : el;
-        });
-        this.setState({
-            words: newState
-        });
-    }
-
     render() {
         const { words, isLoading, error } = this.state;
 
@@ -76,7 +67,6 @@ export default class WordsList extends React.Component {
                                     english={word.english}
                                     russian={word.russian}
                                     transcription={word.transcription}
-                                    handleEdit={this.handleEdit}
                                     loadData={this.loadData}
                                 />)
                         }

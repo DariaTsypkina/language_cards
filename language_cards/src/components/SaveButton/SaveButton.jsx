@@ -5,6 +5,6 @@ export default function SaveButton(props) {
     const { save, isDisabled } = props;
 
     return (
-        <button className={styles.button} onClick={save} disabled={isDisabled}>Save</button >
+        <button className={styles.button} onClick={save} disabled={isDisabled}>&#10004;</button >
     )
 }

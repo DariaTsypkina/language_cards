@@ -1,15 +1,37 @@
 import React from 'react';
 import styles from './list.module.scss';
 import WordsListLine from '../WordsListLine/WordsListLine';
-import json from '../../words.json';
+import InputLine from '../WordsListLine/InputLine';
 
 export default class WordsList extends React.Component {
     state = {
-        words: []
+        words: [],
+        isLoading: false,
+        error: null
     }
 
     componentDidMount() {
-        this.setState({ words: json.words });
+        this.setState({ isLoading: true });
+
+        this.loadData();
+    }
+
+    loadData = () => {
+        fetch('/api/words')
+            .then(response => {
+                if (response.ok) { //Проверяем что код ответа 200
+                    return response.json();
+                } else {
+                    throw new Error('Something went wrong ...');
+                }
+            })
+            .then((response) => {
+                this.setState({
+                    words: response,
+                    isLoading: false
+                })
+            })
+            .catch(error => this.setState({ error, isLoading: false }));
     }
 
     handleEdit = (value, id) => {
@@ -22,7 +44,16 @@ export default class WordsList extends React.Component {
     }
 
     render() {
-        const { words } = this.state;
+        const { words, isLoading, error } = this.state;
+
+        if (error) {
+            return <p>{error.message}</p>
+        }
+
+        if (isLoading) {
+            return <p>Loading...</p>
+        }
+
         return (
             <div className={styles.container}>
                 <table className={styles.table}>
@@ -36,15 +67,17 @@ export default class WordsList extends React.Component {
                         </tr>
                     </thead>
                     <tbody>
+                        <InputLine loadData={this.loadData} />
                         {
-                            words?.map(word =>
+                            words?.reverse().map(word =>
                                 <WordsListLine
                                     key={word.id}
                                     id={word.id}
                                     english={word.english}
-                                    translation={word.translation}
+                                    russian={word.russian}
                                     transcription={word.transcription}
                                     handleEdit={this.handleEdit}
+                                    loadData={this.loadData}
                                 />)
                         }
                     </tbody>

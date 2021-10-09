@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import SaveButton from '../SaveButton/SaveButton';
 import styles from './line.module.scss';
 
-export default function InputLine({ loadData }) {
+export default function InputLine({ LoadData }) {
     const [newWord, setNewWord] = useState({
         english: '',
         russian: '',
@@ -17,7 +17,7 @@ export default function InputLine({ loadData }) {
 
     const isDisabled = Object.values(newWord).some((word) => !word);
 
-    const handleSave = () => {
+    const handleSaveNew = () => {
         if (!newWord.english.match(/^[A-Za-z 0-9]*$/)) {
             setErrors({ ...errors, english: 'Latin only' });
         } else if (!newWord.russian.match(/^[а-яё 0-9]+$/i)) {
@@ -42,7 +42,7 @@ export default function InputLine({ loadData }) {
                         throw new Error('Something went wrong ...');
                     }
                 })
-                .then(loadData);
+                .then(LoadData);
         }
     }
 
@@ -63,7 +63,7 @@ export default function InputLine({ loadData }) {
 
     const inputLine =
         <tr className={styles.line}>
-            <td className={styles.cell}>
+            <td>
                 <input
                     className={errors.english ? styles.red : styles.input}
                     type="text"
@@ -74,7 +74,7 @@ export default function InputLine({ loadData }) {
                 <br />
                 <span className={errors.english ? styles.error : ''}>{errors.english}</span>
             </td>
-            <td className={styles.cell}>
+            <td>
                 <input
                     className={errors.russian ? styles.red : styles.input}
                     type="text"
@@ -85,7 +85,7 @@ export default function InputLine({ loadData }) {
                 <br />
                 <span className={errors.russian ? styles.error : ''}>{errors.russian}</span>
             </td>
-            <td className={styles.cell}>
+            <td>
                 <input
                     className={errors.transcription ? styles.red : styles.input}
                     type="text"
@@ -97,8 +97,9 @@ export default function InputLine({ loadData }) {
                 <span className={errors.transcription ? styles.error : ''}>{errors.transcription}</span>
             </td>
             <td className={styles.buttons}>
-                <SaveButton save={handleSave}
-                    isDisabled={isDisabled} />
+                {/* <SaveButton save={handleSaveNew}
+                    isDisabled={isDisabled} /> */}
+                <button onClick={handleSaveNew} disabled={isDisabled}>Save</button>
             </td>
         </tr>;
 

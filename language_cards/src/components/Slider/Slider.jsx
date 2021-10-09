@@ -9,13 +9,14 @@ export default function Slider() {
     const [pos, setPos] = useState(0);
 
     const getWords = () => {
-        fetch('./words.json', {
-            // headers: {
-            //     'Content-Type': 'application/json',
-            //     'Accept': 'application/json'
-            // }
-        })
-            .then(res => res.json())
+        fetch('/api/words')
+            .then(response => {
+                if (response.ok) { //Проверяем что код ответа 200
+                    return response.json();
+                } else {
+                    throw new Error('Something went wrong ...');
+                }
+            })
             .then(result => {
                 setIsLoaded(true);
                 setWords(result);
@@ -27,7 +28,7 @@ export default function Slider() {
     }
 
     useEffect(() => {
-        getWords()
+        getWords();
     }, [])
 
     useEffect(() => {

@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { Children } from 'react';
 import styles from './list.module.scss';
 import WordsListLine from '../WordsListLine/WordsListLine';
 import InputLine from '../WordsListLine/InputLine';
-
+import LoadData from '../LoadData/LoadData';
 export default class WordsList extends React.Component {
+    constructor(props) {
+        super(props);
+        this.LoadData = LoadData.bind(this);
+    }
+
     state = {
         words: [],
         isLoading: false,
@@ -12,26 +17,7 @@ export default class WordsList extends React.Component {
 
     componentDidMount() {
         this.setState({ isLoading: true });
-
-        this.loadData();
-    }
-
-    loadData = () => {
-        fetch('/api/words')
-            .then(response => {
-                if (response.ok) { //Проверяем что код ответа 200
-                    return response.json();
-                } else {
-                    throw new Error('Something went wrong ...');
-                }
-            })
-            .then((response) => {
-                this.setState({
-                    words: response,
-                    isLoading: false
-                })
-            })
-            .catch(error => this.setState({ error, isLoading: false }));
+        this.LoadData();
     }
 
     render() {
@@ -58,7 +44,7 @@ export default class WordsList extends React.Component {
                         </tr>
                     </thead>
                     <tbody>
-                        <InputLine loadData={this.loadData} />
+                        <InputLine LoadData={this.LoadData} />
                         {
                             words?.reverse().map(word =>
                                 <WordsListLine
@@ -67,7 +53,7 @@ export default class WordsList extends React.Component {
                                     english={word.english}
                                     russian={word.russian}
                                     transcription={word.transcription}
-                                    loadData={this.loadData}
+                                    LoadData={this.LoadData}
                                 />)
                         }
                     </tbody>
@@ -75,4 +61,15 @@ export default class WordsList extends React.Component {
             </div>
         );
     }
+}
+
+const Loader = ({ error, isLoading }) => {
+    if (error) {
+        return <p>{error.message}</p>
+    }
+
+    if (isLoading) {
+        return <p>Loading...</p>
+    }
+    return Children
 }

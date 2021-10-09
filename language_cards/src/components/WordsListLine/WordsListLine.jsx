@@ -6,10 +6,9 @@ import DeleteButton from '../DeleteButton/DeleteButton';
 import styles from './line.module.scss';
 
 export default function WordsListLine(props) {
-    const { english, russian, transcription, id, loadData } = props;
+    const { english, russian, transcription, id, LoadData } = props;
 
     const [newWord, setNewWord] = useState({
-        id: id,
         english: english,
         russian: russian,
         transcription: transcription
@@ -31,17 +30,17 @@ export default function WordsListLine(props) {
         } else if (!newWord.russian.match(/^[а-яё 0-9]+$/i)) {
             setErrors({ ...errors, russian: 'Cyrillic only' });
         } else {
-            console.log(newWord)
+            // console.log(newWord)
             fetch(`/api/words/${id}/update`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json;charset=utf-8'
                 },
                 body: JSON.stringify({
-                    id: newWord.id,
                     english: newWord.english,
                     russian: newWord.russian,
-                    transcription: newWord.transcription
+                    transcription: newWord.transcription,
+                    tags: []
                 })
             })
                 .then(response => {
@@ -51,7 +50,7 @@ export default function WordsListLine(props) {
                         throw new Error('Something went wrong ...');
                     }
                 })
-                .then(loadData);
+                .then(LoadData);
             toggleSelected(!isSelected);
         }
     }
@@ -73,7 +72,6 @@ export default function WordsListLine(props) {
 
     const handleCancel = () => {
         setNewWord({
-            id: id,
             english: english,
             russian: russian,
             transcription: transcription
@@ -110,7 +108,7 @@ export default function WordsListLine(props) {
                     throw new Error('Something went wrong ...');
                 }
             })
-            .then(loadData);
+            .then(LoadData);
     }
 
     return (

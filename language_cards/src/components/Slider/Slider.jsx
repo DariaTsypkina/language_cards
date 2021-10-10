@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import SliderWrapper from "./SliderWrapper";
-import styles from './slider.module.scss';
+import Preloader from "../Preloader/Preloader";
 
 export default function Slider() {
     const [words, setWords] = useState([]);
     const [error, setError] = useState(null);
-    const [isLoaded, setIsLoaded] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
     const [pos, setPos] = useState(0);
 
     const getWords = () => {
@@ -18,16 +18,17 @@ export default function Slider() {
                 }
             })
             .then(result => {
-                setIsLoaded(true);
+                setIsLoading(false);
                 setWords(result);
             },
                 (error) => {
-                    setIsLoaded(true);
+                    setIsLoading(false);
                     setError(error);
                 })
     }
 
     useEffect(() => {
+        setIsLoading(true);
         getWords();
     }, [])
 
@@ -45,28 +46,18 @@ export default function Slider() {
         setPos(pos === words.length - 1 ? 0 : pos + 1);
     }
 
-    if (!isLoaded) {
-        return <div className={styles.container}>
-            <div className={styles.loading}>
-                <p className={styles.info}>Loading...</p>
-            </div>
-        </div>
-    } else if (error) {
-        return <div className={styles.container}>
-            <div className={styles.error}>
-                <p className={styles.info}>Something went wrong...<br />
-                    <span className={styles.error__details}>{error.message}</span></p>
-            </div>
-        </div>
-    } else {
-        return (
-            words?.length > 0 && <SliderWrapper
-                onShowPrev={showPrevHandler}
-                onShowNext={showNextHandler}
-                number={pos}
-                dataLength={words.length}
-                data={words}
-            />
-        )
-    }
+    return (
+        <Preloader isLoading={isLoading} error={error}>
+            {
+                words?.length > 0 && <SliderWrapper
+                    onShowPrev={showPrevHandler}
+                    onShowNext={showNextHandler}
+                    number={pos}
+                    dataLength={words.length}
+                    data={words}
+                />
+            }
+        </Preloader>
+    )
+
 }

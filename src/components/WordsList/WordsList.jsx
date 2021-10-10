@@ -86,7 +86,7 @@ export default function WordsList() {
                     <tbody>
                         <InputLine loadData={getWords} />
                         {
-                            words?.reverse().map(word =>
+                            words.map(word =>
                                 <WordsListLine
                                     key={word.id}
                                     id={word.id}

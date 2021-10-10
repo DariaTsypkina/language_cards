@@ -42,7 +42,7 @@ export default function InputLine({ loadData }) {
                         throw new Error('Something went wrong ...');
                     }
                 })
-                .then(loadData());
+                .then(loadData);
         }
     }
 

@@ -1,36 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import SliderWrapper from "./SliderWrapper";
 import Preloader from "../Preloader/Preloader";
+import Context from "../../context/Context";
 
 export default function Slider() {
-    const [words, setWords] = useState([]);
-    const [error, setError] = useState(null);
-    const [isLoading, setIsLoading] = useState(false);
+    const { words, isLoading, error } = useContext(Context);
+
     const [pos, setPos] = useState(0);
-
-    const getWords = () => {
-        fetch('/api/words')
-            .then(response => {
-                if (response.ok) { //Проверяем что код ответа 200
-                    return response.json();
-                } else {
-                    throw new Error('Something went wrong ...');
-                }
-            })
-            .then(result => {
-                setIsLoading(false);
-                setWords(result);
-            },
-                (error) => {
-                    setIsLoading(false);
-                    setError(error);
-                })
-    }
-
-    useEffect(() => {
-        setIsLoading(true);
-        getWords();
-    }, [])
 
     useEffect(() => {
         if (pos > words.length) {

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import SaveButton from '../SaveButton/SaveButton';
 import styles from './line.module.scss';
 
-export default function InputLine({ LoadData }) {
+export default function InputLine({ loadData }) {
     const [newWord, setNewWord] = useState({
         english: '',
         russian: '',
@@ -42,7 +42,7 @@ export default function InputLine({ LoadData }) {
                         throw new Error('Something went wrong ...');
                     }
                 })
-                .then(LoadData);
+                .then(loadData());
         }
     }
 
@@ -97,9 +97,8 @@ export default function InputLine({ LoadData }) {
                 <span className={errors.transcription ? styles.error : ''}>{errors.transcription}</span>
             </td>
             <td className={styles.buttons}>
-                {/* <SaveButton save={handleSaveNew}
-                    isDisabled={isDisabled} /> */}
-                <button onClick={handleSaveNew} disabled={isDisabled}>Save</button>
+                <SaveButton save={handleSaveNew}
+                    isDisabled={isDisabled} />
             </td>
         </tr>;
 

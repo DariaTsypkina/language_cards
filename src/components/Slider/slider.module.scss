@@ -20,7 +20,7 @@
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
-    max-width: 475px;
+    max-width: calc(475px - 65.5px);
     margin: 0 auto;
 }
 

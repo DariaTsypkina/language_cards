@@ -1,4 +1,4 @@
-import React, { Children } from 'react';
+import React from 'react';
 import styles from './list.module.scss';
 import WordsListLine from '../WordsListLine/WordsListLine';
 import InputLine from '../WordsListLine/InputLine';

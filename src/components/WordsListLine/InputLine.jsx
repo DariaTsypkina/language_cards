@@ -36,13 +36,20 @@ export default function InputLine({ loadData }) {
                 })
             })
                 .then(response => {
+                    setNewWord({
+                        english: '',
+                        russian: '',
+                        transcription: ''
+                    });
+
                     if (response.ok) { //Проверяем что код ответа 200
                         return response.json();
                     } else {
                         throw new Error('Something went wrong ...');
                     }
                 })
-                .then(loadData);
+                .then(loadData)
+                .catch(err => console.log(err));
         }
     }
 

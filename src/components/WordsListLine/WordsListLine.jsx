@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import CancelChangeButton from '../CancelChangeButton/CancelChangeButton';
 import SaveButton from '../SaveButton/SaveButton';
 import ChangeButton from '../ChangeButton/ChangeButton';
@@ -22,7 +22,13 @@ export default function WordsListLine(props) {
 
     const [isSelected, toggleSelected] = useState(false);
 
-    const isDisabled = Object.values(newWord).some((word) => !word);
+    const [isDisabled, setIsDisabled] = useState(false);
+
+    useEffect(() => {
+        Object.values(newWord).some((word) => !word)
+            ? setIsDisabled(true)
+            : setIsDisabled(false)
+    }, [newWord])
 
     const handleSave = (id) => {
         if (!newWord.english.match(/^[A-Za-z 0-9]*$/)) {
@@ -49,7 +55,8 @@ export default function WordsListLine(props) {
                         throw new Error('Something went wrong ...');
                     }
                 })
-                .then(loadData);
+                .then(loadData)
+                .catch(err => console.log(err));
             toggleSelected(!isSelected);
         }
     }

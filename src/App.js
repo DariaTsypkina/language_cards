@@ -30,7 +30,7 @@ function App() {
           })
           .then(result => {
               setIsLoading(false);
-              setWords(result);
+              setWords(result.reverse());
           })
           .catch(error => {
             setIsLoading(false);

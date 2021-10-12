@@ -14,7 +14,7 @@ export default function SliderWrapper(props) {
     useEffect(() => {
         const filteredIDs = Array.from(new Set(learnt));
         setProgress(filteredIDs.length);
-    }, [learnt])
+    }, [learnt, progress])
 
     return (
         <div>

@@ -31,11 +31,11 @@ function App() {
           .then(result => {
               setIsLoading(false);
               setWords(result);
-          },
-              (error) => {
-                  setIsLoading(false);
-                  setError(error);
-              })
+          })
+          .catch(error => {
+            setIsLoading(false);
+            setError(error);
+        });
   }
 
   useEffect(() => {

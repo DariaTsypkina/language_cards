@@ -1,10 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
 import styles from './button.module.scss';
 
 export default function CheckButton(props) {
+    const { handleProgress, id } = props;
     const [checked, setChecked] = useState(false);
-    const location = useLocation();
 
     const buttonRef = useRef(null);
     useEffect(() => buttonRef.current && buttonRef.current.focus());
@@ -13,17 +12,14 @@ export default function CheckButton(props) {
         setChecked(!checked);
     }
 
-    // добавили 2 функции по клику, если на странице game
-    const handleChange = () => {
-        if (location.pathname === '/game') {
-            handleCheck();
-            props.handleProgress();
-        } else handleCheck();
+    const handleChange = (id) => {
+        handleProgress && handleProgress(id);
+        handleCheck();
     }
 
     return (
         !checked
-            ? <button className={styles.button} onClick={handleChange} ref={buttonRef}>Check</button>
+            ? <button className={styles.button} onClick={() => handleChange(id)} ref={buttonRef}>Check</button>
             : <div className={styles.translation} onClick={handleCheck}>{props.translation}</div>
     );
 }

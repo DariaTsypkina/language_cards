@@ -9,8 +9,7 @@ export default function Card(props) {
             <div className={styles.card__transcription}>{props.transcription}</div>
             <div className={styles.buttons}>
                 <CheckButton
-                    translation={props.translation}
-                    handleProgress={props.handleProgress}
+                    {...props}
                 />
             </div>
         </div>

@@ -1,17 +1,19 @@
 @import '../../assets/variables/Variables.module.scss';
 
 .loader {
-    color: grey;
-    font-family: $fontFamily;
-    height: 5vh;
-    left: 50%;
-    overflow-x: hidden;
-    padding-top: 7vh;
     position: absolute;
-    text-align: center;
     top: 50%;
-    transform: translate(-50%, -50%);
+    left: 50%;
     width: 50vw;
+    height: 5vh;
+    padding-top: 7vh;
+
+    font-family: $fontFamily;
+    text-align: center;
+    color: grey;
+
+    overflow-x: hidden;
+    transform: translate(-50%, -50%);
 
     &:before {
         animation: left-to-right 3s alternate infinite linear;
@@ -69,9 +71,10 @@
     width: 50%;
     row-gap: 30px;
 
-    &__404 {
+    &__title {
         font-weight: bolder;
         font-size: 2.5rem;
+        text-align: center;
         text-shadow: 4px 4px 2px rgba(150, 150, 150, 1);
     }
 

@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Card from "../Card/Card";
 import styles from './slider.module.scss';
 
@@ -6,9 +6,6 @@ export default function SliderWrapper(props) {
     const { onShowPrev, onShowNext, data, number, dataLength } = props;
     const [progress, setProgress] = useState(0);
     const [learnt, setLearnt] = useState([]);
-
-    const buttonRef = useRef(null);
-    useEffect(() => buttonRef.current && buttonRef.current.focus());
 
     const handleProgress = (id) => {
         setLearnt([...learnt, id]);

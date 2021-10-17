@@ -24,7 +24,7 @@ const InputLine = inject('wordsStore')(observer(({ wordsStore }) => {
         } else if (!newWord.russian.match(/^[а-яё 0-9]+$/i)) {
             setErrors({ ...errors, russian: 'Cyrillic only' });
         } else {
-            wordsStore.addNewWord(newWord.english, newWord.russian, newWord.transcription);
+            wordsStore.addNewWord(newWord);
             setNewWord({
                 english: '',
                 russian: '',

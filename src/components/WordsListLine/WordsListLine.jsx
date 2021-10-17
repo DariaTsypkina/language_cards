@@ -36,7 +36,7 @@ export default function WordsListLine(props) {
         } else if (!newWord.russian.match(/^[а-яё 0-9]+$/i)) {
             setErrors({ ...errors, russian: 'Cyrillic only' });
         } else {
-            props.updateWord(id, newWord.english, newWord.russian, newWord.transcription);
+            props.updateWord(id, newWord);
             toggleSelected(!isSelected);
         }
     }

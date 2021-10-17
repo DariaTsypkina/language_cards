@@ -9,35 +9,27 @@ export const getWords = () => {
     return fetch(baseURL).then(res => _getResponse(res));
 }
 
-export const addWord = (english, russian, transcription) => {
+export const addWord = (newWord) => {
+    newWord.tags = [];
     return fetch(`${baseURL}/add`, {
         method: 'POST',
                 headers: {
                     'Content-Type': 'application/json;charset=utf-8'
                 },
-                body: JSON.stringify({
-                    english: english,
-                    russian: russian,
-                    transcription: transcription,
-                    tags: []
-                })
+                body: JSON.stringify(newWord)
     }).then(res => {
         _getResponse(res);
     });
 }
 
-export const updateWord = (id, english, russian, transcription) => {
+export const updateWord = (id, newWord) => {
+    newWord.tags = [];
     return fetch(`${baseURL}/${id}/update`, {
         method: 'POST',
                 headers: {
                     'Content-Type': 'application/json;charset=utf-8'
                 },
-                body: JSON.stringify({
-                    english: english,
-                    russian: russian,
-                    transcription: transcription,
-                    tags: []
-                })
+                body: JSON.stringify(newWord)
     }).then(res => {
         _getResponse(res);
     });

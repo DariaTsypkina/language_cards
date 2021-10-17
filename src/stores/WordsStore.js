@@ -10,38 +10,34 @@ class WordsStore {
         makeAutoObservable(this)
     }
 
-    _catchError = (err) => {
-        this.isLoading = false;
-        return this.error = err;
-    }
-
     loadWords = () => {
         this.isLoading = true;
         getWords().then(data => {
-            this.setWords(data.reverse());
+            this.words = data.reverse();
             this.isLoading = false;
         })
-        .catch(err => this._catchError(err));
+        .catch(err => {
+            this.error = err;
+            this.isLoading = false;
+        });
     }
 
-    addNewWord = (english, russian, transcription) => {
-        addWord(english, russian, transcription).then(this.loadWords());
-        window.location.reload();
+    addNewWord = (newWord) => {
+        addWord(newWord);
+        this.words.push(newWord);
+        this.words = this.words.reverse();
     }
 
-    updateWords = (id, english, russian, transcription) => {
-        updateWord(id, english, russian, transcription)
-        .then(this.loadWords());
-        window.location.reload();
+    updateWords = (id, newWord) => {
+        updateWord(id, newWord);
+        const index = this.words.findIndex(item => item.id === id);
+        this.words[index] = newWord;
     }
 
     deleteWords = (id) => {
-        deleteWord(id).then(this.loadWords());
-        window.location.reload();
-    }
-
-    setWords = (data) => {
-        this.words = data;
+        deleteWord(id);
+        const index = this.words.findIndex(item => item.id === id);
+        this.words.splice(Number(index), 1);
     }
 }
 

@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import SaveButton from '../SaveButton/SaveButton';
 import styles from './line.module.scss';
+import { observer, inject } from 'mobx-react';
 
-export default function InputLine({ loadData }) {
+const InputLine = inject('wordsStore')(observer(({ wordsStore }) => {
     const [newWord, setNewWord] = useState({
         english: '',
         russian: '',
@@ -23,33 +24,7 @@ export default function InputLine({ loadData }) {
         } else if (!newWord.russian.match(/^[а-яё 0-9]+$/i)) {
             setErrors({ ...errors, russian: 'Cyrillic only' });
         } else {
-            fetch("/api/words/add", {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json;charset=utf-8'
-                },
-                body: JSON.stringify({
-                    english: newWord.english,
-                    russian: newWord.russian,
-                    transcription: newWord.transcription,
-                    tags: []
-                })
-            })
-                .then(response => {
-                    setNewWord({
-                        english: '',
-                        russian: '',
-                        transcription: ''
-                    });
-
-                    if (response.ok) { //Проверяем что код ответа 200
-                        return response.json();
-                    } else {
-                        throw new Error('Something went wrong ...');
-                    }
-                })
-                .then(loadData)
-                .catch(err => console.log(err));
+            wordsStore.addNewWord(newWord.english, newWord.russian, newWord.transcription);
         }
     }
 
@@ -112,4 +87,6 @@ export default function InputLine({ loadData }) {
     return (
         inputLine
     )
-}
+}))
+
+export default InputLine;

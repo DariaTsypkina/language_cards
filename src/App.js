@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useEffect} from 'react';
 import {
   BrowserRouter as Router,
   Switch,
@@ -12,60 +12,31 @@ import Slider from './components/Slider/Slider';
 import WordsList from './components/WordsList/WordsList';
 import CardList from './components/CardList/CardList';
 import Error404 from './components/Error_404/Error404';
-import Context from './context/Context';
+import { inject, observer } from 'mobx-react';
 
-function App() {
-  const [words, setWords] = useState([]);
-  const [error, setError] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
-
-  const getWords = () => {
-      fetch('/api/words')
-          .then(response => {
-              if (response.ok) { //Проверяем что код ответа 200
-                  return response.json();
-              } else {
-                  throw new Error('Something went wrong ...');
-              }
-          })
-          .then(result => {
-              setIsLoading(false);
-              setWords(result.reverse());
-          })
-          .catch(error => {
-            setIsLoading(false);
-            setError(error);
-        });
-  }
-
+const App = inject('wordsStore')(observer(({wordsStore}) => {
   useEffect(() => {
-      setIsLoading(true);
-      getWords();
-  }, [])
-
+    wordsStore.loadWords();
+  }, [wordsStore]);
 
   return (
-    
     <BrowserRouter>
-    <div>
-      <Header/>
-      <Context.Provider value={{words, isLoading, error, getWords}}>
-      <main className={styles.main}>
+     <div>
+       <Header/>
+  
+       <main className={styles.main}>
 
-        <Switch>
-          <Route exact path="/game" component={Slider} />
-          <Route exact path="/cards" component={CardList} />
-          <Route exact path="/" component={WordsList} />
-          <Route component={Error404}/>
-        </Switch>
+       <Switch>
+         <Route exact path="/game" component={Slider} />
+         <Route exact path="/cards" component={CardList} />
+         <Route exact path="/" component={WordsList} />
+         <Route component={Error404}/>
+       </Switch>
 
-      </main>
-      </Context.Provider>
-    </div>
-    </BrowserRouter>
-    
-  );
-}
+       </main>
+     </div>
+   </BrowserRouter>
+  )
+}));
 
 export default App;
-

@@ -1,10 +1,12 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState } from "react";
 import SliderWrapper from "./SliderWrapper";
 import Preloader from "../Preloader/Preloader";
-import Context from "../../context/Context";
+import { inject, observer } from "mobx-react";
 
-export default function Slider() {
-    const { words, isLoading, error } = useContext(Context);
+const Slider = inject('wordsStore')(observer(({ wordsStore }) => {
+    const words = wordsStore.words;
+    const isLoading = wordsStore.isLoading;
+    const error = wordsStore.error;
 
     const [pos, setPos] = useState(0);
 
@@ -25,7 +27,8 @@ export default function Slider() {
     return (
         <Preloader isLoading={isLoading} error={error}>
             {
-                words?.length > 0 && <SliderWrapper
+                words.length > 0
+                && <SliderWrapper
                     onShowPrev={showPrevHandler}
                     onShowNext={showNextHandler}
                     number={pos}
@@ -35,5 +38,6 @@ export default function Slider() {
             }
         </Preloader>
     )
+}))
 
-}
+export default Slider;

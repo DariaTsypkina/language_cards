@@ -1,4 +1,4 @@
-import { makeAutoObservable } from 'mobx';
+import { makeObservable, action, observable } from 'mobx';
 import { getWords, addWord, updateWord, deleteWord } from '../utils/api';
 
 class WordsStore {
@@ -7,7 +7,13 @@ class WordsStore {
     error = null
 
     constructor() {
-        makeAutoObservable(this)
+        makeObservable(this, {
+            words: observable,
+            loadWords: action,
+            addNewWord: action,
+            updateWords: action,
+            deleteWords: action
+        })
     }
 
     loadWords = () => {

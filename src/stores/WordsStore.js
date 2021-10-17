@@ -19,8 +19,8 @@ class WordsStore {
     loadWords = () => {
         this.isLoading = true;
         getWords().then(data => {
-            this.words = data.reverse();
             this.isLoading = false;
+            this.words = data.reverse();
         })
         .catch(err => {
             this.error = err;

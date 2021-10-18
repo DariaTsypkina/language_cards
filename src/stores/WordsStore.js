@@ -35,6 +35,15 @@ class WordsStore {
             this.error = err;
         }
         
+        const data = await getWords();
+        this.isLoading = false;
+        
+        this.words = data.reverse();
+        this.isLoaded = true;
+    }
+
+    addNewWord = (newWord) => {
+        addWord(newWord);
         this.words = [newWord, ...this.words];
     }
 

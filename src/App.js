@@ -15,9 +15,11 @@ import Error404 from './components/Error_404/Error404';
 import { inject, observer } from 'mobx-react';
 
 const App = inject('wordsStore')(observer(({wordsStore}) => {
+  const {loadWords} = wordsStore;
+  
   useEffect(() => {
-    wordsStore.loadWords();
-  }, [wordsStore]);
+      loadWords();
+  });
 
   return (
     <BrowserRouter>

@@ -4,9 +4,7 @@ import Preloader from "../Preloader/Preloader";
 import { inject, observer } from "mobx-react";
 
 const Slider = inject('wordsStore')(observer(({ wordsStore }) => {
-    const words = wordsStore.words;
-    const isLoading = wordsStore.isLoading;
-    const error = wordsStore.error;
+    const { words, isLoading, error } = wordsStore;
 
     const [pos, setPos] = useState(0);
 

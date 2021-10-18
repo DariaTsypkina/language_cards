@@ -6,9 +6,7 @@ import Preloader from '../Preloader/Preloader';
 import { observer, inject } from 'mobx-react';
 
 const WordsList = inject('wordsStore')(observer(({ wordsStore }) => {
-    const words = wordsStore.words;
-    const isLoading = wordsStore.isLoading;
-    const error = wordsStore.error;
+    const { words, isLoading, error } = wordsStore;
 
     return (
         <Preloader isLoading={isLoading} error={error}>
@@ -43,7 +41,5 @@ const WordsList = inject('wordsStore')(observer(({ wordsStore }) => {
         </Preloader>
     );
 }))
-
-
 
 export default WordsList;

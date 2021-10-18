@@ -1,37 +1,30 @@
-import { makeObservable, action, observable } from 'mobx';
+import { makeAutoObservable} from 'mobx';
 import { getWords, addWord, updateWord, deleteWord } from '../utils/api';
 
 class WordsStore {
-    words = []
-    isLoading = false
-    error = null
+    words = [];
+    isLoaded = false;
+    isLoading = false;
+    error = null;
 
     constructor() {
-        makeObservable(this, {
-            words: observable,
-            loadWords: action,
-            addNewWord: action,
-            updateWords: action,
-            deleteWords: action
-        })
+        makeAutoObservable(this);
     }
 
-    loadWords = () => {
+    loadWords = async () => {
+        if (this.isLoaded && this.isLoading) return;
+        
         this.isLoading = true;
-        getWords().then(data => {
-            this.isLoading = false;
-            this.words = data.reverse();
-        })
-        .catch(err => {
-            this.error = err;
-            this.isLoading = false;
-        });
+        const data = await getWords();
+        this.isLoading = false;
+        
+        this.words = data.reverse();
+        this.isLoaded = true;
     }
 
     addNewWord = (newWord) => {
         addWord(newWord);
-        this.words.push(newWord);
-        this.words = this.words.reverse();
+        this.words = [newWord, ...this.words];
     }
 
     updateWords = (id, newWord) => {

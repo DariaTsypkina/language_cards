@@ -5,10 +5,7 @@ import Preloader from '../Preloader/Preloader';
 import styles from './CardList.module.scss';
 
 const CardList = inject('wordsStore')(observer(({ wordsStore }) => {
-    const words = wordsStore.words;
-    const isLoading = wordsStore.isLoading;
-    const error = wordsStore.error;
-
+    const { words, isLoading, error } = wordsStore;
     return (
         <Preloader isLoading={isLoading} error={error}>
             <section className={styles.container}>

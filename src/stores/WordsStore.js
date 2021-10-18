@@ -28,13 +28,8 @@ class WordsStore {
         }
     }
 
-    addNewWord = async (newWord) => {
-        try {
-            await addWord(newWord);
-        } catch(err) {
-            this.error = err;
-        }
-        
+    addNewWord = (newWord) => {
+        addWord(newWord);
         this.words = [newWord, ...this.words];
     }
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {
   BrowserRouter as Router,
   Switch,
@@ -12,27 +12,33 @@ import Slider from './components/Slider/Slider';
 import WordsList from './components/WordsList/WordsList';
 import CardList from './components/CardList/CardList';
 import Error404 from './components/Error_404/Error404';
+import { inject, observer } from 'mobx-react';
 
-function App() {
+const App = inject('wordsStore')(observer(({wordsStore}) => {
+  const {loadWords} = wordsStore;
+  
+  useEffect(() => {
+      loadWords();
+  });
+
   return (
     <BrowserRouter>
-    <div>
-      <Header/>
+     <div>
+       <Header/>
+  
+       <main className={styles.main}>
 
-      <main className={styles.main}>
+       <Switch>
+         <Route exact path="/game" component={Slider} />
+         <Route exact path="/cards" component={CardList} />
+         <Route exact path="/" component={WordsList} />
+         <Route component={Error404}/>
+       </Switch>
 
-        <Switch>
-          <Route exact path="/game" component={Slider} />
-          <Route exact path="/cards" component={CardList} />
-          <Route exact path="/" component={WordsList} />
-          <Route component={Error404}/>
-        </Switch>
-
-      </main>
-
-    </div>
-    </BrowserRouter>
-  );
-}
+       </main>
+     </div>
+   </BrowserRouter>
+  )
+}));
 
 export default App;

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import CancelChangeButton from '../CancelChangeButton/CancelChangeButton';
 import SaveButton from '../SaveButton/SaveButton';
 import ChangeButton from '../ChangeButton/ChangeButton';
@@ -6,7 +6,7 @@ import DeleteButton from '../DeleteButton/DeleteButton';
 import styles from './line.module.scss';
 
 export default function WordsListLine(props) {
-    const { english, russian, transcription, id, loadData } = props;
+    const { english, russian, transcription, id } = props;
 
     const [newWord, setNewWord] = useState({
         english: english,
@@ -22,7 +22,13 @@ export default function WordsListLine(props) {
 
     const [isSelected, toggleSelected] = useState(false);
 
-    const isDisabled = Object.values(newWord).some((word) => !word);
+    const [isDisabled, setIsDisabled] = useState(false);
+
+    useEffect(() => {
+        Object.values(newWord).some((word) => !word)
+            ? setIsDisabled(true)
+            : setIsDisabled(false)
+    }, [newWord])
 
     const handleSave = (id) => {
         if (!newWord.english.match(/^[A-Za-z 0-9]*$/)) {
@@ -30,26 +36,7 @@ export default function WordsListLine(props) {
         } else if (!newWord.russian.match(/^[а-яё 0-9]+$/i)) {
             setErrors({ ...errors, russian: 'Cyrillic only' });
         } else {
-            fetch(`/api/words/${id}/update`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json;charset=utf-8'
-                },
-                body: JSON.stringify({
-                    english: newWord.english,
-                    russian: newWord.russian,
-                    transcription: newWord.transcription,
-                    tags: []
-                })
-            })
-                .then(response => {
-                    if (response.ok) { //Проверяем что код ответа 200
-                        return response.json();
-                    } else {
-                        throw new Error('Something went wrong ...');
-                    }
-                })
-                .then(loadData);
+            props.updateWord(id, newWord);
             toggleSelected(!isSelected);
         }
     }
@@ -88,20 +75,7 @@ export default function WordsListLine(props) {
     }
 
     const handleDelete = (id) => {
-        fetch(`/api/words/${id}/delete`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json;charset=utf-8'
-            }
-        })
-            .then(response => {
-                if (response.ok) { //Проверяем что код ответа 200
-                    return response.json();
-                } else {
-                    throw new Error('Something went wrong ...');
-                }
-            })
-            .then(loadData);
+        props.deleteWord(id);
     }
 
     return (

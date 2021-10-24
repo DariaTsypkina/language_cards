@@ -1,36 +1,12 @@
 import React, { useEffect, useState } from "react";
 import SliderWrapper from "./SliderWrapper";
 import Preloader from "../Preloader/Preloader";
+import { inject, observer } from "mobx-react";
 
-export default function Slider() {
-    const [words, setWords] = useState([]);
-    const [error, setError] = useState(null);
-    const [isLoading, setIsLoading] = useState(false);
+const Slider = inject('wordsStore')(observer(({ wordsStore }) => {
+    const { words, isLoading, error } = wordsStore;
+
     const [pos, setPos] = useState(0);
-
-    const getWords = () => {
-        fetch('/api/words')
-            .then(response => {
-                if (response.ok) { //Проверяем что код ответа 200
-                    return response.json();
-                } else {
-                    throw new Error('Something went wrong ...');
-                }
-            })
-            .then(result => {
-                setIsLoading(false);
-                setWords(result);
-            },
-                (error) => {
-                    setIsLoading(false);
-                    setError(error);
-                })
-    }
-
-    useEffect(() => {
-        setIsLoading(true);
-        getWords();
-    }, [])
 
     useEffect(() => {
         if (pos > words.length) {
@@ -49,7 +25,8 @@ export default function Slider() {
     return (
         <Preloader isLoading={isLoading} error={error}>
             {
-                words?.length > 0 && <SliderWrapper
+                words.length > 0
+                && <SliderWrapper
                     onShowPrev={showPrevHandler}
                     onShowNext={showNextHandler}
                     number={pos}
@@ -59,5 +36,6 @@ export default function Slider() {
             }
         </Preloader>
     )
+}))
 
-}
+export default Slider;

@@ -1,5 +1,7 @@
 # Language Cards App
 
+## Project preview
+
 ## To start the project
 
 Clone repo

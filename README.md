@@ -2,7 +2,18 @@
 
 ## Project preview
 
+You can easily add, correct, delete new words and track you progress.
+
 ![Project preview](/src/assets/screenshots/lang_app.gif)
+
+## Techologies used
+
+* **React**
+* **React Hooks**
+* **MobX**
+* **API**
+* **HTTP requests**
+* **SCSS**
 
 ## To run the project
 

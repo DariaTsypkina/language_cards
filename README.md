@@ -2,7 +2,9 @@
 
 ## Project preview
 
-## To start the project
+![Project preview](/src/assets/screenshots/lang_app.gif)
+
+## To run the project
 
 Clone repo
 ```javascript

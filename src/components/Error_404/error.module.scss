@@ -1,0 +1,31 @@
+@import '../../assets/variables/Variables.module.scss';
+
+.container {
+    height: 88vh;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    font-family: $fontFamily;
+    font-size: 2.5rem;
+    background: url('../../assets/images/404_cat.png') left bottom no-repeat;
+    background-size: 50%;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 50%;
+    row-gap: 30px;
+
+    &__404 {
+        font-weight: bolder;
+        font-size: 10rem;
+        text-shadow: 4px 4px 2px rgba(150, 150, 150, 1);
+    }
+
+    &__details {
+        text-shadow: 4px 4px 2px rgba(150, 150, 150, 1);
+    }
+}

@@ -1,0 +1,60 @@
+@import '../../assets/variables/Variables.module.scss';
+
+.title {
+    margin: 0px;
+    margin-bottom: 20px;
+    color: $customRed;
+    text-align: center;
+    text-shadow: 5px 3px 3px rgb(182, 182, 182);
+}
+
+.progress {
+    margin-bottom: 10px;
+    font-family: $fontFamily;
+    font-weight: bolder;
+    text-align: center;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    max-width: calc(475px - 5%);
+    margin: 0 auto;
+}
+
+.button {
+    box-sizing: border-box;
+    width: 50px;
+    height: 50px;
+    outline-style: none;
+    border-radius: 100px;
+    border: none;
+    color: white;
+    font-weight: bolder;
+    font-size: x-large;
+    background-color: $customRed;
+    cursor: pointer;
+
+    &:hover {
+        transition: 0.5s all;
+        background-color: $customRedDarker;
+    }
+
+    &__container {
+        flex-grow: 0;
+    }
+}
+
+.count__container {
+    flex-grow: 2;
+    text-align: center;
+    padding: 15px;
+    font-weight: bolder;
+    font-size: large;
+}
+
+.card {
+    @include cardView;
+}

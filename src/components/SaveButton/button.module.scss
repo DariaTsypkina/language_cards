@@ -1,0 +1,33 @@
+@import '../../assets/variables/Variables.module.scss';
+
+.button {
+    position: relative;
+    width: 35px;
+    height: 30px;
+    padding: 8px 0px;
+    margin-right: 10px;
+    background-color: $customGreen;
+    color: white;
+    font-size: small;
+    border: none;
+    border-radius: 5px;
+    box-sizing: border-box;
+    text-align: center;
+
+    &:hover {
+        cursor: pointer;
+        font-weight: bolder;
+        color: black;
+        transition: all 0.5s;
+    }
+
+    &:disabled {
+        background-color: $customRedDarker;
+        color: grey;
+
+        &:hover {
+            cursor: default;
+            font-weight: normal;
+        }
+    }
+}
